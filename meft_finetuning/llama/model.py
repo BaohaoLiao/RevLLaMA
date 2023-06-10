@@ -254,7 +254,11 @@ class Transformer(nn.Module):
         h = self.sum_factor.half() * h1 + h2
 
         h = self.norm(h)
-        output = self.output(h)
+
+        if self.output.weight.requires_grad:
+            output = F.linear(h, self.output.weight.half())
+        else:
+            output = self.output(h)
         output = output[:, :-1, :].reshape(-1, self.vocab_size)
         labels = labels[:, 1:].flatten()
 

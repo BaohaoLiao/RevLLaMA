@@ -26,6 +26,7 @@ def RevLlama7B(args, **kwargs):
         x1_factor=args.x1_factor,
         x2_factor=args.x2_factor,
         sum_factor=args.sum_factor,
+        finetune_output_layer=args.finetune_output_layer,
         **params
     )
     tokenizer = Tokenizer(model_path=llama_model_path + "/tokenizer.model")
@@ -43,11 +44,16 @@ def RevLlama7B(args, **kwargs):
             param.requires_grad = True
             param.data = param.data.float()
 
+        if params.finetune_output_layer and ("output" in name):
+            param.requires_grad = True
+            param.data = param.data.float()
+
+    """
     for name, param in model_revllama.layers[-1 * args.adapter_layer :].named_parameters():
         if "factor" in name or "adapter" in name:
             param.data = param.data.float()
             param.requires_grad = True
-
+    """
     return model_revllama
 
 
