@@ -96,7 +96,7 @@ def get_args_parser():
     parser.add_argument("--model", default="llama7B_meft", type=str, metavar="MODEL", help="Name of model to train")
     parser.add_argument("--max_seq_len", type=int, default=512, metavar="LENGTH", help="the maximum sequence length")
     parser.add_argument("--adapter_layer", type=int, default=30, metavar="MEFT", help="the number of adapter layer")
-    parser.add_argument("--adapter_dim", type=int, default=0, metavar="MEFT", help="bottleneck dimension for adapter")
+    parser.add_argument("--adapter_dim", type=int, default=8, metavar="MEFT", help="bottleneck dimension for adapter")
     parser.add_argument(
         "--adapter_dropout", type=float, default=0.05, metavar="MEFT", help="dropout rate for adapter"
     )
