@@ -44,7 +44,7 @@ def RevLlama7B(args, **kwargs):
             param.requires_grad = True
             param.data = param.data.float()
 
-        if params.finetune_output_layer and ("output" in name):
+        if model_args.finetune_output_layer and ("output" in name):
             param.requires_grad = True
             param.data = param.data.float()
 
