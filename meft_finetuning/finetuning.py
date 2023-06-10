@@ -105,7 +105,7 @@ def get_args_parser():
     parser.add_argument("--x1_factor", type=float, default=0.1, metavar="MEFT", help="scaling factor for lambda")
     parser.add_argument("--x2_factor", type=float, default=1, metavar="MEFT", help="scaling factor for beta")
     parser.add_argument(
-        "--sum_factor", type=flloat, default=0., metavar="MEFT", help="initial scaling factor for alpha, it's trainable"
+        "--sum_factor", type=float, default=0., metavar="MEFT", help="initial scaling factor for alpha, it's trainable"
     )
 
     # Optimizer parameters
