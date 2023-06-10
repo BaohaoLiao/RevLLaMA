@@ -214,8 +214,7 @@ class Transformer(nn.Module):
 
         self.adapter_layer = params.adapter_layer
         self.reversible_layer = params.reversible_layer
-        #self.sum_factor = nn.Parameter(torch.tensor(params.sum_factor))
-        self.sum_factor = params.sum_factor
+        self.sum_factor = nn.Parameter(torch.tensor(params.sum_factor))
         assert (self.adapter_layer <= self.n_layers) and (self.reversible_layer <= self.adapter_layer)
 
         self.criterion = torch.nn.CrossEntropyLoss(ignore_index=0)
@@ -252,7 +251,7 @@ class Transformer(nn.Module):
             h = layer(h, start_pos, freqs_cis, mask)
 
         h1, h2 = torch.chunk(h, 2, dim=-1)
-        h = self.sum_factor * h1 + h2
+        h = self.sum_factor.half() * h1 + h2
 
         h = self.norm(h)
         output = self.output(h)
