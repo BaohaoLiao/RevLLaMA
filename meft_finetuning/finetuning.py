@@ -220,7 +220,7 @@ def main(args):
     model_without_ddp = model
     print("Model = %s" % str(model_without_ddp))
     model_parameters = filter(lambda p: p.requires_grad, model.parameters())
-    print(f"Num. of trainbale parameters {sum([np.prod(p.size()) for p in model.parameters() if p.requires_grad])}")
+    print("Num. of trainbale parameters: %d" % sum([np.prod(p.size()) for p in model.parameters() if p.requires_grad]))
 
     eff_batch_size = args.batch_size * args.accum_iter * misc.get_world_size()
 
