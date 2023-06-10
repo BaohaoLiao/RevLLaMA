@@ -180,7 +180,7 @@ class RevTransformerBlock(TransformerBlock):
         self.G = self.forward_adapter
 
     def forward(self, x: torch.Tensor, start_pos: int, freqs_cis: torch.Tensor, mask: Optional[torch.Tensor]):
-        x1, x2 = torch.chunk(hidden_states, 2, dim=-1)
+        x1, x2 = torch.chunk(x, 2, dim=-1)
         f_x2 = self.F(x, start_pos, freqs_cis, mask)
         y1 = self.x1_factor * x1 + f_x2
 
