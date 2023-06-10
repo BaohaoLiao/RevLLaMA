@@ -252,7 +252,7 @@ class Transformer(nn.Module):
             h = layer(h, start_pos, freqs_cis, mask)
 
         h1, h2 = torch.chunk(h, 2, dim=-1)
-        h = self.sum_factor.half() * h1 + h2
+        h = self.sum_factor * h1 + h2
 
         h = self.norm(h)
         output = self.output(h)
