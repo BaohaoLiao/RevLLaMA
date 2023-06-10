@@ -14,6 +14,7 @@ torchrun --nproc_per_node 1 finetuning.py \
     --x1_factor 0.1 \
     --x2_factor 1 \
     --sum_factor 0 \
+    --finetune_output_layer \
     --max_seq_len 512 \
     --batch_size 4 \
     --epochs 5 \
