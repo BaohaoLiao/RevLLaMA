@@ -215,7 +215,7 @@ class Transformer(nn.Module):
             h = layer(h, start_pos, freqs_cis, mask, adapter[adapter_index].half())
             adapter_index = adapter_index + 1
 
-        h = self.norm(h)
+        h =self.norm(h)
         output = self.output(h)
         output = output[:, :-1, :].reshape(-1, self.vocab_size)
         labels = labels[:, 1:].flatten()
