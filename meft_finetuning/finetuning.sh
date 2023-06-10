@@ -11,6 +11,9 @@ torchrun --nproc_per_node 1 finetuning.py \
     --llama_model_path $TARGET_FOLDER/ \
     --data_path $DATA_PATH/alpaca_data.json \
     --adapter_layer 32 \
+    --x1_factor 0.1 \
+    --x2_factor 1 \
+    --sum_factor 0 \
     --max_seq_len 512 \
     --batch_size 4 \
     --epochs 5 \
