@@ -29,6 +29,7 @@ class ModelArgs:
     x1_factor: float = 0.1
     x2_factor: float = 1
     sum_factor: float = 0
+    finetune_output_layer: bool = False
 
 
 class Adapter(nn.Module):
