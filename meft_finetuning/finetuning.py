@@ -108,7 +108,9 @@ def get_args_parser():
     parser.add_argument(
         "--sum_factor", type=float, default=0., metavar="MEFT", help="initial scaling factor for alpha, it's trainable"
     )
-    parser.add_argument("--finetune_output_layer", action="store_true", help="If true, finetune the output layer")
+    parser.add_argument(
+        "--finetune_output_layer", action="store_true", metavar="MEFT", help="If true, finetune the output layer"
+    )
 
     # Optimizer parameters
     parser.add_argument("--weight_decay", type=float, default=0.05, help="weight decay (default: 0.05)")
