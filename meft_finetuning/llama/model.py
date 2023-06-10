@@ -103,7 +103,6 @@ class Attention(nn.Module):
 
         self.cache_k = torch.zeros((args.max_batch_size, args.max_seq_len, self.n_local_heads, self.head_dim)).cuda()
         self.cache_v = torch.zeros((args.max_batch_size, args.max_seq_len, self.n_local_heads, self.head_dim)).cuda()
-        self.gate = torch.nn.Parameter(torch.zeros(1, self.n_local_heads, 1, 1))
 
     def forward(
         self, x: torch.Tensor, start_pos: int, freqs_cis: torch.Tensor, mask: Optional[torch.Tensor]
@@ -215,7 +214,8 @@ class Transformer(nn.Module):
 
         self.adapter_layer = params.adapter_layer
         self.reversible_layer = params.reversible_layer
-        self.sum_factor = nn.Parameter(torch.tensor(params.sum_factor))
+        #self.sum_factor = nn.Parameter(torch.tensor(params.sum_factor))
+        self.sum_factor = params.sum_factor
         assert (self.adapter_layer <= self.n_layers) and (self.reversible_layer <= self.adapter_layer)
 
         self.criterion = torch.nn.CrossEntropyLoss(ignore_index=0)
