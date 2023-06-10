@@ -39,7 +39,10 @@ class Adapter(nn.Module):
         self.dropout = Dropout(dropout)
 
     def forward(self, x):
-        x = self.dense2(self.dropout(F.silu(self.dense1(x))))
+        x = F.linear(x, self.dense1.weight.half(), bias=self.dense1.bias.half())
+        x = F.silu(x)
+        x = self.dropout(x)
+        x = F.linear(x, self.dense2.weight.half(), bias=self.dense2.bias.half())
         return x
 
 
@@ -249,7 +252,7 @@ class Transformer(nn.Module):
             h = layer(h, start_pos, freqs_cis, mask)
 
         h1, h2 = torch.chunk(h, 2, dim=-1)
-        h = self.sum_factor * h1 + h2
+        h = self.sum_factor.half() * h1 + h2
 
         h = self.norm(h)
         output = self.output(h)
