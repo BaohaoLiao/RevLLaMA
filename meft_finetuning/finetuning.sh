@@ -7,7 +7,7 @@ DATA_PATH=/ivi/ilps/personal/bliao/data/stanford_alpaca
 SAVE_DIR=/ivi/ilps/personal/bliao/llama_adapter/01_revllama/checkpoint
 
 torchrun --nproc_per_node 1 finetuning.py \
-    --model Llama7B_adapter \
+    --model RevLlama7B \
     --llama_model_path $TARGET_FOLDER/ \
     --data_path $DATA_PATH/alpaca_data.json \
     --adapter_layer 32 \
