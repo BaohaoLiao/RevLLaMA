@@ -126,6 +126,7 @@ def get_args_parser():
         "--min_lr", type=float, default=0.0, metavar="LR", help="lower lr bound for cyclic schedulers that hit 0"
     )
     parser.add_argument("--warmup_epochs", type=int, default=40, metavar="N", help="epochs to warmup LR")
+    parser.add_argument("--max_norm", type=float, default=None, help="max norm for gradient")
 
     # Dataset parameters
     parser.add_argument("--data_path", default="/instruction_dataset/", type=str, help="dataset path")

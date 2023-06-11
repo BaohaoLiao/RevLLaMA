@@ -48,7 +48,13 @@ def train_one_epoch(
 
         loss /= accum_iter
 
-        loss_scaler(loss, optimizer, parameters=model.parameters(), update_grad=(data_iter_step + 1) % accum_iter == 0)
+        loss_scaler(
+            loss,
+            optimizer,
+            clip_grad=args.max_norm,
+            parameters=model.parameters(),
+            update_grad=(data_iter_step + 1) % accum_iter == 0
+        )
         if (data_iter_step + 1) % accum_iter == 0:
             optimizer.zero_grad()
 
