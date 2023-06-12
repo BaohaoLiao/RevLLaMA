@@ -22,18 +22,19 @@ def main(
     torch.save(new_model, os.path.join(adapter_dir, "adapter_parameters.pth"))
 
 
-    keys_to_keep = [
+    keys_to_save = [
         "adapter_layer", "adapter_dropout", "adapter_dim", "reversible_layer", "x1_factor",
         "x2_factor", "sum_factor", "finetune_output_layer"
     ]
     argparse_dict = vars(ckpt["args"])
-    for k in argparse_dict.keys():
-        if k not in keys_to_keep:
-            del argparse_dict[k]
+    args_to_save = {}
+    for k, v in argparse_dict.items():
+        if k in keys_to_save:
+            args_to_save[k] = v
     print("---------- adapter args ---------------")
-    print(argparse_dict)
+    print(args_to_save)
     with open(os.path.join(adapter_dir, "args.json"), "w") as outfile:
-        json.dump(argparse_dict, outfile)
+        json.dump(args_to_save, outfile)
 
 if __name__ == "__main__":
     fire.Fire(main)
