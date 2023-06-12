@@ -21,7 +21,15 @@ def main(
     print(new_model.keys())
     torch.save(new_model, os.path.join(adapter_dir, "adapter_parameters.pth"))
 
+
+    keys_to_keep = [
+        "adapter_layer", "adapter_dropout", "adapter_dim", "reversible_layer", "x1_factor",
+        "x2_factor", "sum_factor", "finetune_output_layer"
+    ]
     argparse_dict = vars(ckpt["args"])
+    for k in argparse_dict:
+        if k not in keys_to_keep:
+            del argparse_dict[k]
     print("---------- adapter args ---------------")
     print(argparse_dict)
     with open(os.path.join(adapter_dir, "args.json"), "w") as outfile:
