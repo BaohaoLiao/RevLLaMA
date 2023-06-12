@@ -64,6 +64,8 @@ def load(
     with open(os.path.join(adapter_dir, "args.json"), "r") as f:
         adapter_params = json.loads(f.read())
     params.update(adapter_params)
+    del params["max_seq_len"]  # use inference max_seq_len rather than training one
+    del params["max_batch_size"] # use inference max_batch_size rather than training one
 
     model_args: ModelArgs = ModelArgs(max_seq_len=max_seq_len, max_batch_size=max_batch_size, **params)
     tokenizer = Tokenizer(model_path=tokenizer_path)
