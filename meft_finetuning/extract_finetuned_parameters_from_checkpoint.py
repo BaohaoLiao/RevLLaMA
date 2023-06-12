@@ -26,7 +26,6 @@ def main(
     with open(os.path.join(adapter_dir, "args.json"), "w") as outfile:
         json.dump(argparse_dict, outfile)
 
-
 if __name__ == "__main__":
     fire.Fire(main)
 
