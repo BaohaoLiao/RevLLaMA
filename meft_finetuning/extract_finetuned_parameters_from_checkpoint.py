@@ -27,7 +27,7 @@ def main(
         "x2_factor", "sum_factor", "finetune_output_layer"
     ]
     argparse_dict = vars(ckpt["args"])
-    for k in argparse_dict:
+    for k in argparse_dict.keys():
         if k not in keys_to_keep:
             del argparse_dict[k]
     print("---------- adapter args ---------------")
